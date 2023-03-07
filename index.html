@@ -1,0 +1,61 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/png" sizes="32x32" href="./images/icon.jpg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,700&display=swap" rel="stylesheet">
+    <title>Side Hustle Form Project</title>
+</head>
+<body>
+    <h1>SideHustle</h1>
+    <main>
+        <form class="signup-form" name="myForm" method="post" id="form">
+            <h2><strong>Sign up to your account</strong></h2>
+
+            <label for="name">Full name:</label><br>
+            <input class="input-box input-field" type="text" id="name" name="name" placeholder="Name"> <br>
+            <div id="name-error"></div>
+
+            <label for="email">Email:</label><br>
+            <input class="input-box input-field" type="email" id="email" name="email" placeholder="Email"> <br>
+            <div id="email-error"></div>
+            <!-- <p class="email-error">You have entered an invalid email address!</p> -->
+
+            <label for="number">Phone number:</label><br>
+            <input class="input-box input-field" type="tel" id="number" name="number" placeholder="Number"> <br>
+            <div id="number-error"></div>
+
+            <label class="input-field" id="gender-input" for="gender" required>Gender:</label><br>
+            <input type="radio" id="male" name="gender" value="male">
+            <label for="male">Male</label><br>
+            <input type="radio" id="female" name="gender" value="female">
+            <label for="female">female</label><br>
+            <input type="radio" id="others" name="gender" value="others">
+            <label for="others">Others</label>
+            <div id="gender-error"></div>
+            <br>
+
+            <label for="password">Password:</label><br>
+            <input class="input-box input-field" type="password" name="password" id="password" placeholder="Password"> <br>
+            <div id="password-error"></div>
+            <input class="input-supmit" type="submit" value="Submit">
+        </form>
+    </main>
+
+    <div class="popup-wrapper">
+        <div class="popup">
+            <div class="popup-close">x</div>
+            <h2>SideHustle</h2>
+            <p>Thanks for signing up...</p>
+            <a href="#">Proceed to Dashboard</a>
+            <a class="back" href="#">Back to edit form</a>
+        </div>
+    </div>
+
+    <script src="sandbox.js"></script>
+</body>
+</html>
