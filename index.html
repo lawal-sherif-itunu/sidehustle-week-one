@@ -3,12 +3,116 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
     <link rel="icon" type="image/png" sizes="32x32" href="./images/icon.jpg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,700&display=swap" rel="stylesheet">
     <title>Side Hustle Form Project</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #fbfbff;
+            font-family: 'Fraunces', serif;
+            height: 100vh;
+        }
+
+        h1 {
+            font-family: 'Fraunces', serif;
+            text-align: center;
+            color: #5F68D1;
+            margin: 3.5rem 0 1rem 0;
+        }
+
+        main {
+            max-width: 30rem;
+            margin-inline: auto;
+            background-color: #fff;
+            border-radius: .5rem;
+            padding: 3rem;
+            box-shadow: 2px 5px 10px #888888;
+        }
+
+        h2 {
+            margin-bottom: 1rem;
+            color: #040f8b;
+        }
+
+        label {
+            color: #040f8b;
+        }
+
+        input.input-box, .input-supmit {
+            width: 100%;
+            padding: .7rem;
+            margin: .3rem 0;
+            border-radius: .4rem;
+            border: #ccc9c9 2px solid;
+        }
+
+        .input-supmit {
+            background-color: #5F68D1;
+            border: 0;
+            color: #fff;
+            font-size: 1rem;
+            font-weight: 700;
+        }
+
+        #name-error, #email-error, #number-error, #password-error {
+            color: crimson;
+            font-family: Arial;
+            font-weight: 600;
+            font-size: .7rem;
+            text-align: right;
+            /* display: none; */
+        }
+
+        .popup-wrapper {
+            background-color: rgba(0,0,0,0.7);
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: none;
+        }
+
+        .popup {
+            font-family: arial;
+            text-align: center;
+            width: 100%;
+            max-width: 300px;
+            margin: 10% auto;
+            padding: 20px;
+            background-color: #fff;
+            position: relative;
+        }
+
+        .popup a {
+            background-color: #5F68D1;
+            color: #fff;
+            text-decoration: none;
+            padding: 6px 10px;
+            margin-top: 1rem;
+            display: block;
+        }
+
+        a.back {
+            background-color: crimson;
+        }
+
+        .popup-close {
+            position: absolute;
+            top: 5px;
+            right: 8px;
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
     <h1>SideHustle</h1>
@@ -30,11 +134,11 @@
             <div id="number-error"></div>
 
             <label class="input-field" id="gender-input" for="gender" required>Gender:</label><br>
-            <input type="radio" id="male" name="gender" value="male">
+            <input type="radio" id="male" name="gender" value="male" required>
             <label for="male">Male</label><br>
-            <input type="radio" id="female" name="gender" value="female">
+            <input type="radio" id="female" name="gender" value="female" required>
             <label for="female">female</label><br>
-            <input type="radio" id="others" name="gender" value="others">
+            <input type="radio" id="others" name="gender" value="others" required>
             <label for="others">Others</label>
             <div id="gender-error"></div>
             <br>
@@ -56,6 +160,95 @@
         </div>
     </div>
 
-    <script src="sandbox.js"></script>
+    <script>
+        const form = document.getElementById('form');
+        const name = document.getElementById('name');
+        const email = document.getElementById('email');
+        const number = document.getElementById('number');
+        const nameError = document.getElementById('name-error');
+        const emailError = document.getElementById('email-error');
+        const numberError = document.getElementById('number-error');
+        const passwrodError = document.getElementById('password-error');
+        const popup = document.querySelector('.popup-wrapper');
+        const close = document.querySelector('.popup-close');
+        const backToForm = document.querySelector('.back');
+        const popupContent = document.querySelector('.popup');
+        const submit = document.querySelector('.input-supmit');
+
+        form.addEventListener('submit', e => {
+            let nameMessages = []
+            if (name.value === '' || name.value == null) {
+                nameMessages.push('Name is required')
+            }
+
+            if (nameMessages.length > 0) {
+            nameError.innerText = nameMessages.join(', ')
+            } else {
+                nameError.style.display = 'none';
+            }
+            e.preventDefault();
+
+            // // // ERROR MESSAGE FOR EMAIL
+
+            let emailMessages = []
+            if (email.value === '' || email.value == null) {
+                emailMessages.push('Email is required')
+            }
+
+            if (emailMessages.length > 0) {
+                emailError.innerText = emailMessages.join(', ')
+            } else {
+                emailError.style.display = 'none';
+            }
+            e.preventDefault();
+
+            // // // ERROR MESSAGE FOR NUMBER
+            let numberMessages = []
+            if (number.value === '' || number.value == null) {
+                numberMessages.push('Number is required')
+            }
+
+            if (numberMessages.length > 0) {
+                numberError.innerText = numberMessages.join(', ')
+            } else {
+                numberError.style.display = 'none';
+            }
+            e.preventDefault();
+
+            // // // ERROR MESSAGE FOR PASSWORD
+            let passwordMessages = []
+            if (password.value === '' || password.value == null) {
+                passwordMessages.push('Password is required')
+            }
+
+            if (passwordMessages.length > 0) {
+                passwrodError.innerText = passwordMessages.join(', ')
+            } else {
+                passwrodError.style.display = 'none';
+            }
+            e.preventDefault();
+
+            e.target.preventDefault();
+
+        });
+
+        form.addEventListener('submit', e => {
+            if (name.value !== '' && name.value != null && email.value !== '' && email.value != null && number.value !== '' && number.value != null && password.value !== '' && password.value != null) {
+
+                popup.style.display = 'block';
+
+                close.addEventListener('click', e => {
+                    popup.style.display = 'none';
+                })
+
+
+                backToForm.addEventListener('click', e => {
+                    popup.style.display = 'none';
+                });
+
+            }
+        });
+    </script>
+
 </body>
 </html>
